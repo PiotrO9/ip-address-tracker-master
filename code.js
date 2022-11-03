@@ -1,24 +1,109 @@
-let ipAddress = getIpAddress();
-console.log(ipAddress);
+const IpAddress = document.getElementById("IpAddress");
+const Location = document.getElementById("Location");
+const Timezone = document.getElementById("Timezone");
+const Isp = document.getElementById("Isp");
 
-function getIpAddress() {
-    let url = 'https://api.db-ip.com/v2/free/self';
-    fetch(url).then(function(response){
-        response.json().then(function(data){
-            // console.log(data);
-            getLocation(data.ipAddress);
-            console.log(data.ipAddress);
-            return data.ipAddress;
+const searchBtn = document.getElementById("arrowContainer");
+
+startApp();
+
+searchBtn.addEventListener("click", function(){
+    const ipFromInput = document.getElementById("mainInput").value;
+    if(ValidateIPaddress(ipFromInput)) {
+        let url = `http://ip-api.com/json/${ipFromInput}`;
+        fetch(url).then(function(response){
+            response.json().then(function(data){
+                let lat = data.lat;
+                let long = data.lon;
+
+                SetMapWithCustomLocation(lat ,long);
+            });
         });
-    });
+    }
+});
+
+function startApp() {
+    SetMap();
+    getIpAddress();
 }
 
+function getIpAddress(inputIpAddress = "") {
+    if(ValidateIPaddress(inputIpAddress)) {
+        getLocation(inputIpAddress);
+    }
+    else {
+        let url = 'https://api.db-ip.com/v2/free/self';
+        fetch(url).then(function(response){
+            response.json().then(function(data){
+                getLocation(data.ipAddress);
+            });
+        });
+    }
+}
 
 function getLocation(ipAddress) {
-    let url = `https://geo.ipify.org/api/v2/country?apiKey=at_rLn6qVLEB15NTJioufW2ItmoNkbyQ&ipAddress=${ipAddress}}`
+    let url = `https://geo.ipify.org/api/v2/country?apiKey=at_rLn6qVLEB15NTJioufW2ItmoNkbyQ&ipAddress=${ipAddress}`
     fetch(url).then(function(response){
         response.json().then(function(data){
-            console.log(data);
+            let isp = data.isp;
+            let country = data.location.country;
+            let timezone = "UTC " + data.location.timezone;
+
+            fillTilesWithInformationFromApis(ipAddress, country, timezone, isp);
         });
     });
 }
+
+function fillTilesWithInformationFromApis(ipAddress, location, timezone, isp) {
+    IpAddress.innerHTML = ipAddress;
+    Location.innerHTML = location;
+    Timezone.innerHTML = timezone;
+    Isp.innerHTML = isp;
+}
+
+function SetMap() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+
+                var map = L.map('map', {
+                    center: [lat, long],
+                    zoom: 15
+                });
+
+                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+            }
+        )
+    }
+}
+
+function SetMapWithCustomLocation(lat, long) {
+    const main = document.querySelector("main");
+    const mapToRemove = document.querySelector("#map");
+    main.removeChild(mapToRemove);
+    main.append(mapToRemove);
+
+    var map = L.map('map', {
+        center: [lat, long],
+        zoom: 15
+    });
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+}
+
+function SetMapFromCustomIp(customIpAddress) {
+
+}
+
+function ValidateIPaddress(ipaddress) {  
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+      return (true);
+    }
+    return (false);
+  }  

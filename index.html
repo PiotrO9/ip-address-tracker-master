@@ -6,6 +6,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="code.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
   <title>Frontend Mentor | IP Address Tracker</title>
 </head>
 <body>
@@ -20,24 +23,26 @@
     <div id="result">
       <div class="tile">
         <p class="tile__title">IP Address</p>
-        <p class="tile__content"></p>
+        <p id="IpAddress" class="tile__content"></p>
       </div>
       <div class="tile">
         <p class="tile__title">Location</p>
-        <p class="tile__content"></p>
+        <p id="Location" class="tile__content"></p>
       </div>
       <div class="tile">
         <p class="tile__title">Timezone</p>
-        <p class="tile__content"></p>
+        <p id="Timezone" class="tile__content"></p>
       </div>
       <div class="tile">
         <p class="tile__title">ISP</p>
-        <p class="tile__content"></p>
+        <p id="Isp" class="tile__content"></p>
       </div>
     </div>
   </header>
   <main>
+    <div id="map">
 
+    </div>
   </main>
 </body>
 </html>

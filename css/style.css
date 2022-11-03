@@ -1,0 +1,80 @@
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+header {
+  width: 100%;
+  height: 35%;
+  min-height: 200px;
+  background-image: url("../images/pattern-bg.png");
+  background-repeat: round;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+header h1 {
+  margin: 0;
+}
+
+#SearchContainer {
+  width: 30%;
+  height: 16%;
+  margin-bottom: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#SearchContainer input {
+  width: 87%;
+  height: 96%;
+  padding-left: 20px;
+  background-color: white;
+  border: none;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+#SearchContainer #arrowContainer {
+  height: 100%;
+  width: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+#result {
+  width: 70%;
+  height: 40%;
+  min-height: 130px;
+  position: absolute;
+  top: 80%;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 1rem;
+}
+#result .tile {
+  width: 25%;
+  padding: 10px;
+  padding-left: 2rem;
+}
+#result .tile .tile__title {
+  text-transform: uppercase;
+}
+
+main {
+  width: 100%;
+  height: 65%;
+  background-color: red;
+}/*# sourceMappingURL=style.css.map */

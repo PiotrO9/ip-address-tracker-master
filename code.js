@@ -17,6 +17,7 @@ searchBtn.addEventListener("click", function(){
                 let long = data.lon;
 
                 SetMapWithCustomLocation(lat ,long);
+                getLocation(ipFromInput);
             });
         });
     }
@@ -85,7 +86,9 @@ function SetMapWithCustomLocation(lat, long) {
     const main = document.querySelector("main");
     const mapToRemove = document.querySelector("#map");
     main.removeChild(mapToRemove);
-    main.append(mapToRemove);
+    let newMap = document.createElement("div");
+    newMap.setAttribute("id", "map");
+    main.appendChild(newMap);
 
     var map = L.map('map', {
         center: [lat, long],
@@ -95,10 +98,6 @@ function SetMapWithCustomLocation(lat, long) {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-}
-
-function SetMapFromCustomIp(customIpAddress) {
-
 }
 
 function ValidateIPaddress(ipaddress) {  

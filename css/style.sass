@@ -1,3 +1,5 @@
+@import './variables'
+
 *
     font-family: 'Rubik', sans-serif
 
@@ -6,7 +8,7 @@ body, html
     margin: 0
 
 body
-    width: 100vw
+    width: 100%
     height: 100vh
     overflow: hidden
 
@@ -22,9 +24,16 @@ header
     justify-content: space-evenly
     align-items: center
 
+    @media (max-width: $MobileResulution)
+        height: 35%
+
     h1
         margin: 0
         color: white
+
+        @media (max-width: $MobileResulution)
+            width: 80%
+            text-align: center
 
 #SearchContainer
     width: 30%
@@ -33,6 +42,10 @@ header
     display: flex
     justify-content: space-between
     align-items: center
+
+    @media (max-width: $MobileResulution)
+        margin-bottom: 9rem
+        width: 70%
 
     input
         width: 87%
@@ -57,6 +70,7 @@ header
     width: 70%
     height: 40%
     min-height: 130px
+    min-width: 700px
     position: absolute
     top: 80%
     display: flex
@@ -65,24 +79,56 @@ header
     border-radius: 1rem
     z-index: 1000
 
+    @media (max-width: $MobileResulution)
+        height: 90%
+        min-width: 350px
+        min-height: 300px
+        top: 65%
+        display: flex
+        flex-direction: column
+        justify-content: start
+
     .tile
         width: 25%
         padding: 10px
         padding-top: 20px
-        padding-left: 2rem 
+        padding-left: 2rem
+
+        @media (max-width: $MobileResulution)
+            width: 87%
+            height: 13%
+            display: flex
+            flex-direction: column
+            justify-content: center
 
         .tile__title
             text-transform: uppercase
             color: grey
             font-weight: 500
 
+            @media (max-width: $MobileResulution)
+                font-size: 0.8rem
+                text-align: center
+
         .tile__content
-            font-size: 1.6rem
+            font-size: 1.5rem
             font-weight: 700
+
+            @media (max-width: $MediumResolution)
+                font-size: 1.1rem
+            
+            @media (max-width: $MobileResulution)
+                height: 10%
+                font-size: 1rem
+                text-align: center
+                margin-top: -0.5rem                
 
 main
     width: 100%
     height: 65%
+
+    @media (max-width: $MobileResulution)
+        height: 100%
 
 #map
     width: 100%

@@ -1,3 +1,7 @@
+import GEOINFORMATION_API from "./apikey.js";
+
+console.log(GEOINFORMATION_API);
+
 const IpAddress = document.getElementById("IpAddress");
 const Location = document.getElementById("Location");
 const Timezone = document.getElementById("Timezone");
@@ -43,7 +47,7 @@ function getIpAddress(inputIpAddress = "") {
 }
 
 function getLocation(ipAddress) {
-    let url = `https://geo.ipify.org/api/v2/country?apiKey=at_rLn6qVLEB15NTJioufW2ItmoNkbyQ&ipAddress=${ipAddress}`
+    let url = `https://geo.ipify.org/api/v2/country?apiKey=${GEOINFORMATION_API}&ipAddress=${ipAddress}`
     fetch(url).then(function(response){
         response.json().then(function(data){
             let isp = data.isp;
@@ -66,8 +70,10 @@ function SetMap() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                lat = position.coords.latitude;
-                long = position.coords.longitude;
+                let lat = position.coords.latitude;
+                let long = position.coords.longitude;
+
+                console.log(lat);
 
                 var map = L.map('map', {
                     center: [lat, long],
